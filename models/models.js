@@ -6,7 +6,7 @@ const ProductoSchema = new mongoose.Schema({
   numeroSerie: String,
   categoria: String,
   precio: Number,
-  fechaCaducidad: {Date, required: false}, //es por si el producto no tiene fecha de caducidad. El tipo date lleva formato '2024-12-31'
+  fechaCaducidad: {type: Date}, //es por si el producto no tiene fecha de caducidad. El tipo date lleva formato '2024-12-31'
   proveedor: { type: mongoose.Schema.Types.ObjectId, ref: 'Proveedor' }, //mongo ya coloca por defecto un id, entonces pues hace referencia a este
 });
 
@@ -19,13 +19,13 @@ const TiendaSchema = new mongoose.Schema({
   capacidadAlmacenamiento: Number,
   horario: {
     //se maneja como un objeto, ya que cada día tiene un horario diferente
-    Lunes:{string, default: 'Cerrado'},
-    Martes:{string, default: 'Cerrado'},
-    Miercoles:{string, default: 'Cerrado'},
-    Jueves:{string, default: 'Cerrado'},
-    Viernes:{string, default: 'Cerrado'},
-    Sabado:{string, default: 'Cerrado'},
-    Domingo:{string, default: 'Cerrado'},
+    Lunes:{type: String, default: 'Cerrado'},
+    Martes:{type: String, default: 'Cerrado'},
+    Miercoles:{type: String, default: 'Cerrado'},
+    Jueves:{type: String, default: 'Cerrado'},
+    Viernes:{type: String, default: 'Cerrado'},
+    Sabado:{type: String, default: 'Cerrado'},
+    Domingo:{type: String, default: 'Cerrado'},
 
   }
 });
@@ -63,7 +63,7 @@ const ProveedorSchema = new mongoose.Schema({
 
 
 const Devolucion = new mongoose.Schema({
-  PedidoRelacionado:{type: mongoose.Schema.Typess.ObjectId, ref: 'Pedido'},
+  PedidoRelacionado:{type: mongoose.Schema.Types.ObjectId, ref: 'Pedido'},
   motivo: String,
   cantidadDevuelta: Number,
   fechaDevolucion: Date,
